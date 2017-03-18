@@ -4,3 +4,6 @@
 # Libraries from package management config: composer (PHP) and npm (Node)
 node_modules/
 vendor/
+
+# Debugging / logging files
+npm-debug.log
