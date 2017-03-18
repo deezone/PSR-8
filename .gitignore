@@ -1,2 +1,6 @@
 # PHPStorm config
 .idea
+
+# Libraries from package management config: composer (PHP) and npm (Node)
+node_modules/
+vendor/

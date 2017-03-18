@@ -1,0 +1,29 @@
+{
+  "name": "DeeZone/PSR-8",
+  "description": "PHP PSR-8 exercise",
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Darren Douglas Lee",
+      "email": "darrendouglas.lee@gmail.com"
+    }
+  ],
+  "autoload": {
+    "classmap": ["src/"],
+    "psr-4": {
+      "Psr\\Hug\\" : "src/",
+      "DeeZone\\Hug\\" : "src/"
+    }
+  },
+  "require": {
+    "php": ">= 7.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0",
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "psr-8",
+  "version": "0.1.0",
+  "description": "Task runner functionality for DeeZone/PSR-8 project.",
+  "engines": {
+    "node": ">=6.7.x"
+  },
+  "repository": "https://github.com/DeeZone/PSR-8",
+  "bugs": "https://github.com/DeeZone/PSR-8/issues",
+  "author": "Darren Douglas Lee <darrendouglas.lee@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-phpcs": "^1.1.1",
+    "gulp-phpunit": "^0.16.0",
+    "gulp-shell": "^0.5.2",
+    "phplint": "^1.7.1"
+  },
+  "scripts": {
+    "start": "php index.php",
+    "test": "php ./vendor/bin/phpunit --verbose tests",
+    "lint": "php ./vendor/bin/phpcs --colors src"
+  }
+}
