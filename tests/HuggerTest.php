@@ -1,19 +1,19 @@
 <?php
-	/**
-	 *
-	 */
-	declare(strict_types=1);
+/**
+ *
+ */
+declare(strict_types=1);
 
-	namespace DeeZone\Hug;
+namespace DeeZone\Hug;
 
-	use Psr\Hug\Huggable;
-	use PHPUnit\Framework\TestCase;
+use Psr\Hug\Huggable;
+use PHPUnit\Framework\TestCase;
 
-	/**
-	 * Class HuggerTest
-	 * @package DeeZone\Hug
-	 */
-	final class HuggerTest extends TestCase
-	{
+/**
+ * Class HuggerTest
+ * @package DeeZone\Hug
+ */
+final class HuggerTest extends TestCase
+{
 
-	}
+}
