@@ -17,6 +17,11 @@ or automate processing of files that will be adjusted to meet coding standards.
 
 - `$ php ./vendor/bin/phpcbf --standard=./phpunit.xml.dest --colors index.php src tests`
 
+**NOTE**: Optionally set path to `phpunit` and `gulp` by `alias` to the user `.bash` file which will remove the path 
+requirements in the examples above. 
+- `alias phpunit='./vendor/bin/phpunit'`
+- `alias gulp='node ./node_modules/gulp/bin/gulp'`
+
 #### Unit Tests
 ##### Confirm PHPUnit installation works
 - `$ ./vendor/bin/phpcbf -h`
@@ -32,8 +37,10 @@ or automate processing of files that will be adjusted to meet coding standards.
 - [Watch Files](https://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php)
 
 
-### Runs PHPUnit tests and basic PHP Lint in a watchful state.
+### Runs PHPUnit tests and basic PHP Lint, ending in a watchful state to rerun when files are changed.
 
-``
-...
-``
+- `gulp`
+
+Which will trigger the `default` tasks defined in the `gulp.js` file:
+- `gulp.task('default', ['phplint', 'phpcs', 'phpunit', 'watch']);`
+

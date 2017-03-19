@@ -69,7 +69,7 @@ gulp.task('phpunit', function () {
  * clean and consistent.
  */
 gulp.task('phpcs', function () {
-    return gulp.src(['./**/*.php', './**/*.inc', 'bin', '!./messagebroker-config/**/*', '!./node_modules/', '!./vendor/**/*'])
+    return gulp.src(['./**/*.php', 'bin', '!./node_modules/', '!./vendor/**/*'])
         .pipe(phpcs({
             bin: 'vendor/bin/phpcs',
             standard: 'ruleset.xml',
@@ -80,7 +80,7 @@ gulp.task('phpcs', function () {
         .pipe(phpcs.reporter('log'));
 });
 
-gulp.task('phpcbf', shell.task(['vendor/bin/phpcbf --standard=PSR2 --ignore=vendor/,node_modules/,messagebroker-config src mbc-user-import.php mbc-user-import.config.inc']));
+gulp.task('phpcbf', shell.task(['vendor/bin/phpcbf --standard=PSR2 --ignore=vendor/,node_modules/']));
 
 /**
  * watch (Gulp): https://github.com/gulpjs/gulp
@@ -88,12 +88,12 @@ gulp.task('phpcbf', shell.task(['vendor/bin/phpcbf --standard=PSR2 --ignore=vend
  * Watch functionality built in to base package. See entry in "default" command.
  */
 gulp.task('watch', function () {
-    gulp.watch(['composer.json', 'phpunit.xml', './**/*.php', './**/*.inc', '!./messagebroker-config/**/*', '!./vendor/**/*', '!./node_modules/**/*'],
+    gulp.watch(['composer.json', 'phpunit.xml', './**/*.php', '!./vendor/**/*', '!./node_modules/**/*'],
         function (event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         });
     gulp.watch('composer.json', ['dump-autoload']);
-    gulp.watch(['phpunit.xml', './**/*.php', './**/*.inc', '!messagebroker-config/', '!vendor/**/*', '!node_modules/**/*'], ['phplint', 'phpunit']);
+    gulp.watch(['phpunit.xml', './**/*.php', '!vendor/**/*', '!node_modules/**/*'], ['phplint', 'phpunit']);
 });
 
 
