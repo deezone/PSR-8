@@ -23,6 +23,11 @@
     "phpunit/phpunit": "~6.0",
     "squizlabs/php_codesniffer": "2.*"
   },
+  "scripts": {
+    "pre-install-cmd": [
+      "./bin/install.sh"
+    ]
+  },
   "config": {
     "preferred-install": "dist"
   }
