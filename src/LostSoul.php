@@ -22,36 +22,23 @@
      */
     public function __construct($minHugsRequired = 1)
     {
-      $this->currentlyHuggingFriendList = new \SplObjectStorage();
       $this->minHugsRequired = $minHugsRequired;
     }
 
     /**
      * Hugs this object.
      *
-     * All hugs are mutual. An object that is hugged MUST in turn hug the other
-     * object back by calling hug() on the first parameter. All objects MUST
-     * implement a mechanism to prevent an infinite loop of hugging.
+     * All hugs are mutual. An object that is hugged must in turn hug the other object back by calling hug() on the
+     * first parameter. The number of times hugs are exchanged is defined by the minHugsRequired property.
      *
-     * @param Huggable $friend
-     *   The object that is hugging this object.
+     * @param Huggable $soul
+     *   The object (soul) that is hugging this object.
      */
-    public function hug(Huggable $friend)
+    public function hug(Huggable $soul)
     {
-      if ($friend === $this) {
-        // weird
-        throw new \Exception('Should not attempt to hug self');
-      }
-      if ($this->currentlyHuggingFriendList->contains($friend)) {
-        // we're already trying to hug $friend
-        // don't initiate another hug loop
-        return;
-      }
-      $this->currentlyHuggingFriendList->attach($friend);
       $hugBacksExpected = $this->minHugsRequired;
       while ($hugBacksExpected--) {
-        $friend->hug($this);
+        $soul->hug($this);
       }
-      $this->currentlyHuggingFriendList->detach($friend);
     }
   }
