@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package DeeZone\Hug
  */
-final class HuggerTest extends TestCase
+final class LostSoulTest extends TestCase
 {
 
 }
