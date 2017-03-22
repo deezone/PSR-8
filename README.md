@@ -34,7 +34,7 @@ requirements in the examples listed.
 - `alias phpunit='./vendor/bin/phpunit'`
 - `alias gulp='node ./node_modules/gulp/bin/gulp'`
 
-#### Unit Tests
+### Unit Tests
 ##### Confirm PHPUnit installation works
 - `$ ./vendor/bin/phpcbf -h`
 - `$ ./vendor/bin/phpcbf -h`
