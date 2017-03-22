@@ -4,6 +4,11 @@ PSR-8 - Mutually Assured Hug
 An implimentation of the [PSR-8 specification](https://github.com/php-fig/fig-standards/blob/master/proposed/psr-8-hug/psr-8-hug.md)
 as a coding exercise to make the world a better place through mutually assured hug logic.
 
+`LostSoul` objects exchange `->hug()`s in an effort to meet the PSR-8 specification
+
+Inspired by the song [Imagine - John Lennon](https://genius.com/John-lennon-imagine-lyrics)
+- *Imagine all the people sharing all the world* ... *And the world will live as one*
+
 ### To Start
 `````
 $ php index.php
