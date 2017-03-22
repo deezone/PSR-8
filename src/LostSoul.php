@@ -8,13 +8,12 @@
 
   use Psr\Hug\Huggable;
 
-
-  /**
-   * Class LostSoul
-   * @package DeeZone\Hug
-   */
-  class LostSoul implements Huggable
-  {
+/**
+ * Class LostSoul
+ * @package DeeZone\Hug
+ */
+class LostSoul implements Huggable
+{
     /** @var int */
     private $minHugsRequired;
 
@@ -23,7 +22,7 @@
      */
     public function __construct($minHugsRequired = 1)
     {
-      $this->minHugsRequired = $minHugsRequired;
+        $this->minHugsRequired = $minHugsRequired;
     }
 
     /**
@@ -37,9 +36,9 @@
      */
     public function hug(Huggable $soul)
     {
-      $hugBacksRequested = $this->minHugsRequired;
-      while ($hugBacksRequested--) {
-        $soul->hug($this);
-      }
+        $hugBacksRequested = $this->minHugsRequired;
+        while ($hugBacksRequested--) {
+            $soul->hug($this);
+        }
     }
-  }
+}

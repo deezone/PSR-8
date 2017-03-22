@@ -1,27 +1,27 @@
 <?php
-  /**
-   * A starting point for a demonstration of an implimentation of the PSR-8 specification. Three lost souls are brought
-   * together to share hugs.
-   */
+/**
+ * A starting point for a demonstration of an implimentation of the PSR-8 specification. Three lost souls are brought
+ * together to share hugs.
+ */
 
-  // Load up the Composer autoload magic
-  require_once __DIR__ . '/vendor/autoload.php';
+// Load up the Composer autoload magic
+require_once __DIR__ . '/vendor/autoload.php';
 
-  use DeeZone\Hug\LostSoul;
+use DeeZone\Hug\LostSoul;
 
-  // Imagine all the people... - JOHN LENNON
-  // @todo: Impliment random number of returned hugs requested as parameter to instantion of LostSoul class.
-  $lostSouls[] = new LostSoul();
-  $lostSouls[] = new LostSoul();
-  $lostSouls[] = new LostSoul();
+// Imagine all the people... - JOHN LENNON
+// @todo: Impliment random number of returned hugs requested as parameter to instantion of LostSoul class.
+$lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
 
-  // Each lost soul gives out some love in the hopes of getting some back
-  // PSR-8 spec #1 : "expresses affection and support"
-  foreach ($lostSouls as $lostSoulCount => $lostSoul) {
+// Each lost soul gives out some love in the hopes of getting some back
+// PSR-8 spec #1 : "expresses affection and support"
+foreach ($lostSouls as $lostSoulCount => $lostSoul) {
     foreach ($lostSouls as $otherLostSoulCount => $otherLostSoul) {
-      // Not a bad idea but the spec says you can't hug yourself
-      if ($lostSoulCount != $otherLostSoulCount) {
-        $lostSoul->hug($otherLostSoul);
-      }
+        // Not a bad idea but the spec says you can't hug yourself
+        if ($lostSoulCount != $otherLostSoulCount) {
+            $lostSoul->hug($otherLostSoul);
+        }
     }
-  }
+}
