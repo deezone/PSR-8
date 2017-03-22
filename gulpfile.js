@@ -72,7 +72,7 @@ gulp.task('phpcs', function () {
     return gulp.src(['./**/*.php', 'bin', '!./node_modules/', '!./vendor/**/*'])
         .pipe(phpcs({
             bin: 'vendor/bin/phpcs',
-            standard: 'ruleset.xml',
+            standard: 'phpunit.xml.dist',
             warningSeverity: 0,
             showSniffCode: 1,
             colors: 1

@@ -9,11 +9,12 @@
 	use Psr\Hug\Huggable;
 	use PHPUnit\Framework\TestCase;
 
-	/**
-	 * Class HuggerTest
-	 * @package DeeZone\Hug
-	 */
-	final class HuggerTest extends TestCase
-	{
+/**
+ * Class HuggerTest
+ *
+ * @package DeeZone\Hug
+ */
+final class HuggerTest extends TestCase
+{
 
-	}
+}
