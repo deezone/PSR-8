@@ -21,7 +21,14 @@ foreach ($lostSouls as $lostSoulCount => $lostSoul) {
     foreach ($lostSouls as $otherLostSoulCount => $otherLostSoul) {
         // Not a bad idea but the spec says you can't hug yourself
         if ($lostSoulCount != $otherLostSoulCount) {
-            $lostSoul->hug($otherLostSoul);
+            try {
+                echo 'Lost Soul: ', $lostSoulCount, PHP_EOL;
+                echo 'Other Lost Soul: ', $otherLostSoulCount, PHP_EOL;
+                $lostSoul->hug($otherLostSoul);
+                echo PHP_EOL, PHP_EOL;
+            } catch (Throwable $t) {
+                echo $t->getMessage(), PHP_EOL;
+            }
         }
     }
 }
