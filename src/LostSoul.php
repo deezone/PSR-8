@@ -15,14 +15,18 @@
 class LostSoul implements Huggable
 {
     /** @var int */
-    private $minHugsRequired;
+    private $loveNeeded;
+
+    /** @var int */
+    private $loveFelt;
 
     /**
-     * @todo inject a HugTerminationStrategy
+     * @param int $loveNeeded
      */
-    public function __construct($minHugsRequired = 1)
+    public function __construct(int $loveNeeded = 1)
     {
-        $this->minHugsRequired = $minHugsRequired;
+        $this->loveNeeded = $loveNeeded;
+        $this->loveFelt = 0;
     }
 
     /**
@@ -32,7 +36,7 @@ class LostSoul implements Huggable
      * first parameter. The number of times hugs are exchanged is defined by the minHugsRequested property.
      *
      * @param Huggable $soul
-     *   The object (soul) that is hugging this object.
+     *   The object (soul) that is hugging this object and will get a hug back in return.
      */
     public function hug(Huggable $soul)
     {
@@ -43,9 +47,15 @@ class LostSoul implements Huggable
               ' specification. An attept at an object hugging itself has been made.');
         }
 
-        $hugBacksRequested = $this->minHugsRequired;
-        while ($hugBacksRequested--) {
+        while ($this->loveFelt < $this->loveNeeded) {
+            // The power of hugs, this LostSoul is feeling it
+            $this->loveFelt++;
+
+            // Give some love back
             $soul->hug($this);
         }
+
+        // The desired level of love from mutual hugs has been achieved, time to let go.
+        return;
     }
 }
