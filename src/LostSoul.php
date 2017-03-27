@@ -1,6 +1,8 @@
 <?php
   /**
-   *
+   * In our world there are many lost souls in various states of mind. With a few hugs their state or at least their
+   * properties can be changed. Once a lost soul is hugged it will inspire them to hug back which ultmatly will make
+   * the world a better place.
    */
   declare(strict_types=1);
 
@@ -14,10 +16,10 @@
  */
 class LostSoul implements Huggable
 {
-    /** @var int */
+    // @var int
     private $loveNeeded;
 
-    /** @var int */
+    // @var int
     private $loveFelt;
 
     /**
@@ -37,8 +39,10 @@ class LostSoul implements Huggable
      *
      * @param Huggable $soul
      *   The object (soul) that is hugging this object and will get a hug back in return.
+     *
+     * @return boolean
      */
-    public function hug(Huggable $soul)
+    public function hug(Huggable $soul): boolean
     {
         // An Exception is thrown as self hugging suggests an error in implimentation. Not a show stopper but should
         // be addressed.
@@ -56,6 +60,16 @@ class LostSoul implements Huggable
         }
 
         // The desired level of love from mutual hugs has been achieved, time to let go.
-        return;
+        return true;
+    }
+
+    /**
+     * How much "love felt" is the object feeling?
+     *
+     * @return int
+     */
+    public function getLoveFelt(): int
+    {
+      return $this->loveFelt;
     }
 }
