@@ -70,6 +70,6 @@ class LostSoul implements Huggable
      */
     public function getLoveFelt(): int
     {
-      return $this->loveFelt;
+        return $this->loveFelt;
     }
 }
