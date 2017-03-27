@@ -30,4 +30,13 @@ final class LostSoulTest extends TestCase
         // reveal the prophecy and create an actual test double object
         $lostSoul->hug($mock->reveal());
     }
+
+  /**
+   * @expectedException \Exception
+   */
+  public function testDoesNotHugSelf()
+  {
+    $lostSoul = new LostSoul();
+    $lostSoul->hug($lostSoul);
+  }
 }
