@@ -40,9 +40,9 @@ class LostSoul implements Huggable
      * @param Huggable $soul
      *   The object (soul) that is hugging this object and will get a hug back in return.
      *
-     * @return boolean
+     * @return Huggable
      */
-    public function hug(Huggable $soul): boolean
+    public function hug(Huggable $soul): Huggable
     {
         // An Exception is thrown as self hugging suggests an error in implimentation. Not a show stopper but should
         // be addressed.
@@ -60,7 +60,7 @@ class LostSoul implements Huggable
         }
 
         // The desired level of love from mutual hugs has been achieved, time to let go.
-        return true;
+        return $soul;
     }
 
     /**
