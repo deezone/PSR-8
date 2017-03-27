@@ -24,7 +24,6 @@ $ php index.php
 or listing of all coding volations by file.
 
 - `$ php ./vendor/bin/phpcs --standard=PSR2 --colors -s index.php src tests`
-- `$ php ./vendor/bin/phpcs --standard=./phpunit.xml.dest --colors -s index.php src tests`
 
 or automate processing of files that will be adjusted to meet coding standards.
 

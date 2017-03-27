@@ -51,7 +51,7 @@ gulp.task('phplint', function (cb) {
  */
 gulp.task('phpunit', function () {
     var options = {debug: false, notify: true};
-    gulp.src('phpunit.xml')
+    gulp.src('phpunit.xml.dist')
         .pipe(phpunit('vendor/bin/phpunit --verbose tests', options))
         .on('error', notify.onError({
             title: "Failed Tests!",
@@ -72,7 +72,7 @@ gulp.task('phpcs', function () {
     return gulp.src(['./**/*.php', 'bin', '!./node_modules/', '!./vendor/**/*'])
         .pipe(phpcs({
             bin: 'vendor/bin/phpcs',
-            standard: 'phpunit.xml.dist',
+            standard: 'PSR2',
             warningSeverity: 0,
             showSniffCode: 1,
             colors: 1
@@ -88,12 +88,12 @@ gulp.task('phpcbf', shell.task(['vendor/bin/phpcbf --standard=PSR2 --ignore=vend
  * Watch functionality built in to base package. See entry in "default" command.
  */
 gulp.task('watch', function () {
-    gulp.watch(['composer.json', 'phpunit.xml', './**/*.php', '!./vendor/**/*', '!./node_modules/**/*'],
+    gulp.watch(['composer.json', 'phpunit.xml.dist', './**/*.php', '!./vendor/**/*', '!./node_modules/**/*'],
         function (event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         });
     gulp.watch('composer.json', ['dump-autoload']);
-    gulp.watch(['phpunit.xml', './**/*.php', '!vendor/**/*', '!node_modules/**/*'], ['phplint', 'phpunit']);
+    gulp.watch(['phpunit.xml.dest', './**/*.php', '!vendor/**/*', '!node_modules/**/*'], ['phplint', 'phpunit']);
 });
 
 
