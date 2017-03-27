@@ -43,8 +43,8 @@ class LostSoul implements Huggable
         // An Exception is thrown as self hugging suggests an error in implimentation. Not a show stopper but should
         // be addressed.
         if ($soul === $this) {
-          throw new \Exception('WARNING: You should always love yourself but self hugging is not supported in the PSR-8' .
-              ' specification. An attept at an object hugging itself has been made.');
+            throw new \Exception('WARNING: You should always love yourself but self hugging is not supported in the ' .
+                'PSR-8 specification. An attept at an object hugging itself has been made.');
         }
 
         while ($this->loveFelt < $this->loveNeeded) {
