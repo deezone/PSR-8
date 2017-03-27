@@ -24,4 +24,11 @@ interface Huggable
    *   The object that is hugging this object.
    */
     public function hug(Huggable $h);
+
+  /**
+   * Current love felt by this object.
+   *
+   * Respond with the current amount of love that the huggable object is feeling.
+   */
+    public function getLoveFelt();
 }
