@@ -20,6 +20,6 @@
   "scripts": {
     "start": "php index.php",
     "test": "php ./vendor/bin/phpunit --verbose tests",
-    "lint": "php ./vendor/bin/phpcs --colors src tests"
+    "lint": "php ./vendor/bin/phpcs --standard=PSR2 --colors src tests"
   }
 }
