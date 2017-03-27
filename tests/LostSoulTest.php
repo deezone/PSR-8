@@ -36,7 +36,32 @@ final class LostSoulTest extends TestCase
    */
   public function testDoesNotHugSelf()
   {
-    $lostSoul = new LostSoul();
-    $lostSoul->hug($lostSoul);
+      $lostSoul = new LostSoul();
+      $lostSoul->hug($lostSoul);
+  }
+
+  /**
+   * Making it to the assertion ensures an infinite loop was not encountered and the hugging terminates
+   */
+  public function testTerminatesHugging()
+  {
+      $lostSoul1 = new LostSoul();
+      $lostSoul2 = new LostSoul();
+      $lostSoul1->hug($lostSoul2);
+
+      $this->assertTrue(true);
+  }
+
+  /**
+   * Making it to the assertion ensures an infinite loop was not encountered and the hugging terminates when a
+   * specific amount of $loveNeeded is defined.
+   */
+  public function testTerminatesDefinedHugging()
+  {
+      $lostSoul1 = new LostSoul(2);
+      $lostSoul2 = new LostSoul(4);
+      $lostSoul1->hug($lostSoul2);
+
+      $this->assertTrue(true);
   }
 }
