@@ -27,6 +27,8 @@ class LostSoul implements Huggable
      */
     public function __construct(int $loveNeeded = 1)
     {
+        // @todo: Refactor to remove support for parameter. A method required by the interface should contain the
+        // loveNeeded logic/calculation. Include randomness.
         $this->loveNeeded = $loveNeeded;
         $this->loveFelt = 0;
     }
@@ -35,7 +37,7 @@ class LostSoul implements Huggable
      * Hugs this object.
      *
      * All hugs are mutual. An object that is hugged will in turn hug the other object back by calling hug() on the
-     * first parameter. The number of times hugs are exchanged is defined by the minHugsRequested property.
+     * first parameter. The number of times hugs are exchanged is defined by the loveNeeded property.
      *
      * @param Huggable $soul
      *   The object (soul) that is hugging this object and will get a hug back in return.
@@ -51,8 +53,10 @@ class LostSoul implements Huggable
                 'PSR-8 specification. An attept at an object hugging itself has been made.');
         }
 
+        // @todo Refactor to own method to define "termination condition". See spec 2.3 for details.
         while ($this->loveFelt < $this->loveNeeded) {
             // The power of hugs, this LostSoul is feeling it
+            // @todo: Add randomness including support for a negative value.
             $this->loveFelt++;
 
             // Give some love back
