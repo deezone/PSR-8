@@ -21,22 +21,18 @@ class LostSoul implements Huggable
 
     // Hug duration range
     // http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
-    const DURATION_MIN = 0;
-    const DURATION_MAX = 3;
+    const DURATION_MIN = 1;
+    const DURATION_MAX = 6;
 
     // @var int
     private $warmAndFuzzy;
 
-    // @var int
-    private $durationOfHug;
-
     /**
-     * At the beginning of every Lost Soul's existance they start nothing. How sad...
+     * At the beginning of every Lost Soul's existance they start with a feeling of nothing. How sad...
      */
     public function __construct()
     {
         $this->warmAndFuzzy = 0;
-        $this->durationOfHug = $this->generateDurationOfHug();
     }
 
     /**
@@ -59,12 +55,16 @@ class LostSoul implements Huggable
                 'PSR-8 specification. An attept at an object hugging itself has been made.');
         }
 
-        while ($this->keepHugging($this, $soul)) {
-            // The power of hugs, this LostSoul is really feeling it
-            $this->warmAndFuzzy += $this->hugImpact($this, $soul);
+        $durationOfHug = $this->determineDurationOfHug();
+        while ($this->keepHugging($this, $soul, $durationOfHug) == true) {
+            $hugImpact = $this->hugImpact($this, $soul, $durationOfHug);
 
-            // Give some love back
-            $soul->hug($this);
+            // The power of hugs, everyone is really feeling it
+            $this->warmAndFuzzy += $hugImpact;
+            $soul->warmAndFuzzy += $hugImpact;
+
+            // That was great, lets do it again
+            $this->hug($soul);
         }
 
         // For better or worst the hugging has stopped. Time to let go.
@@ -76,10 +76,11 @@ class LostSoul implements Huggable
      *
      * @param Huggable $thisSoul
      * @param Huggable $otherSoul
+     * @param int $durationOfHug
      *
      * @return bool
      */
-    private function keepHugging(Huggable $thisSoul, Huggable $otherSoul): bool
+    private function keepHugging(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): bool
     {
         // Always start from a positive perspective.
         $keepHugging = true;
@@ -89,9 +90,10 @@ class LostSoul implements Huggable
             $keepHugging = false;
         }
 
-        // There's always a chance that things might get weird.
-        $hugTollarance = random_int(self::DURATION_MIN, self::DURATION_MAX);
-        if ($this->durationOfHug > $hugTollarance) {
+        // There's always a chance that things might get weird. Once the duration of the hug exceeds the comfort zone
+        // @todo: move hugComfort calculation to own method
+        $hugComfortZone = random_int(self::DURATION_MIN, self::DURATION_MAX);
+        if ($durationOfHug > $hugComfortZone) {
             $keepHugging = false;
         }
 
@@ -109,26 +111,33 @@ class LostSoul implements Huggable
      *
      * @param Huggable $thisSoul
      * @param Huggable $otherSoul
+     * @param int $durationOfHug
      *
      * @return int
      */
-    private function hugImpact(Huggable $thisSoul, Huggable $otherSoul): int
+    private function hugImpact(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): int
     {
         $hugImpact = 0;
-        $durationOfHug = $this->durationOfHug;
 
         // The more positive this soul feels the greater the minimum impact of their hug.
         $hugImpactMin = intval(ceil($thisSoul->warmAndFuzzy / 10));
 
         // The less positive the other soul feels the greater the maximum impact a hug will make.
-        $hugImpactMax = intval(ceil($otherSoul->warmAndFuzzy / 10));
+        // But even in the worst care, a hug can always do a little good.
+        if ($otherSoul->warmAndFuzzy == 0) {
+            $hugImpactMax = 1;
+        } else {
+            $hugImpactMax = intval(ceil($otherSoul->warmAndFuzzy / 10));
+        }
+
+
 
         // Depending who is feeling more positive, a hug's effect can be positive or negative or even nothing at all.
         $giveOrTake = $otherSoul->warmAndFuzzy <=> $thisSoul->warmAndFuzzy;
 
         if ($giveOrTake == self::POSITIVE) {
             // Apply the randomness of life to determine the impact of the hug
-            $hugImpact = intval(random_int($hugImpactMin, $hugImpactMin) * $durationOfHug);
+            $hugImpact = intval(random_int($hugImpactMin, $hugImpactMax) * $durationOfHug);
         } else {
             // The "icky" factor. Sometimes hugs are just weird and unwanted while other times they can save the world.
             $hugImpact = $durationOfHug + $giveOrTake;
@@ -138,14 +147,14 @@ class LostSoul implements Huggable
     }
 
     /**
-     * Generate the duration for the hug. Minimum to maximum second hugs, anything more and there's something
+     * Determine the duration for the hug. Minimum to maximum second hugs, anything more and there's something
      * else going on.
      *
      * http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
      *
      * @return int
      */
-    private function generateDurationOfHug()
+    private function determineDurationOfHug()
     {
         $durationOfHug = random_int(self::DURATION_MIN, self::DURATION_MAX);
 
