@@ -4,11 +4,11 @@
    * properties can be changed. Once a lost soul is hugged it will inspire them to hug back which ultmatly will make
    * the world a better place.
    */
-  declare(strict_types=1);
+declare(strict_types=1);
 
-  namespace DeeZone\Hug;
+namespace DeeZone\Hug;
 
-  use Psr\Hug\Huggable;
+use Psr\Hug\Huggable;
 
 /**
  * Class LostSoul
@@ -16,28 +16,34 @@
  */
 class LostSoul implements Huggable
 {
-    // @var int
-    private $loveNeeded;
+
+    const POSITIVE = 1;
+
+    // Hug duration range
+    // http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
+    const DURATION_MIN = 0;
+    const DURATION_MAX = 3;
 
     // @var int
-    private $loveFelt;
+    private $warmAndFuzzy;
+
+    // @var int
+    private $durationOfHug;
 
     /**
-     * @param int $loveNeeded
+     * At the beginning of every Lost Soul's existance they start nothing. How sad...
      */
-    public function __construct(int $loveNeeded = 1)
+    public function __construct()
     {
-        // @todo: Refactor to remove support for parameter. A method required by the interface should contain the
-        // loveNeeded logic/calculation. Include randomness.
-        $this->loveNeeded = $loveNeeded;
-        $this->loveFelt = 0;
+        $this->warmAndFuzzy = 0;
+        $this->durationOfHug = $this->generateDurationOfHug();
     }
 
     /**
      * Hugs this object.
      *
      * All hugs are mutual. An object that is hugged will in turn hug the other object back by calling hug() on the
-     * first parameter. The number of times hugs are exchanged is defined by the loveNeeded property.
+     * first parameter. The number of times hugs are exchanged is determined by the return of keepHugging().
      *
      * @param Huggable $soul
      *   The object (soul) that is hugging this object and will get a hug back in return.
@@ -53,27 +59,106 @@ class LostSoul implements Huggable
                 'PSR-8 specification. An attept at an object hugging itself has been made.');
         }
 
-        // @todo Refactor to own method to define "termination condition". See spec 2.3 for details.
-        while ($this->loveFelt < $this->loveNeeded) {
-            // The power of hugs, this LostSoul is feeling it
-            // @todo: Add randomness including support for a negative value.
-            $this->loveFelt++;
+        while ($this->keepHugging($this, $soul)) {
+            // The power of hugs, this LostSoul is really feeling it
+            $this->warmAndFuzzy += $this->hugImpact($this, $soul);
 
             // Give some love back
             $soul->hug($this);
         }
 
-        // The desired level of love from mutual hugs has been achieved, time to let go.
+        // For better or worst the hugging has stopped. Time to let go.
         return $soul;
     }
 
     /**
-     * How much "love felt" is the object feeling?
+     * Determine if another exchange of hugs is desired.
+     *
+     * @param Huggable $thisSoul
+     * @param Huggable $otherSoul
+     *
+     * @return bool
+     */
+    private function keepHugging(Huggable $thisSoul, Huggable $otherSoul): bool
+    {
+        // Always start from a positive perspective.
+        $keepHugging = true;
+
+        // Really?!? Absolute bliss? Who has time for another hug?
+        if ($thisSoul->warmAndFuzzy >= 100) {
+            $keepHugging = false;
+        }
+
+        // There's always a chance that things might get weird.
+        $hugTollarance = random_int(self::DURATION_MIN, self::DURATION_MAX);
+        if ($this->durationOfHug > $hugTollarance) {
+            $keepHugging = false;
+        }
+
+        // If the other soul is not feeling warmAndFuzzys at all then at least give them one hug.
+        if ($otherSoul->warmAndFuzzy <= 0) {
+            $keepHugging = true;
+        }
+
+        return $keepHugging;
+    }
+
+    /**
+     * Determine the impact / value of a hug. Not all hugs are created equal.
+     * https://insightsofshaley.wordpress.com/2013/06/29/not-all-hugs-are-created-equal/
+     *
+     * @param Huggable $thisSoul
+     * @param Huggable $otherSoul
      *
      * @return int
      */
-    public function getLoveFelt(): int
+    private function hugImpact(Huggable $thisSoul, Huggable $otherSoul): int
     {
-        return $this->loveFelt;
+        $hugImpact = 0;
+        $durationOfHug = $this->durationOfHug;
+
+        // The more positive this soul feels the greater the minimum impact of their hug.
+        $hugImpactMin = intval(ceil($thisSoul->warmAndFuzzy / 10));
+
+        // The less positive the other soul feels the greater the maximum impact a hug will make.
+        $hugImpactMax = intval(ceil($otherSoul->warmAndFuzzy / 10));
+
+        // Depending who is feeling more positive, a hug's effect can be positive or negative or even nothing at all.
+        $giveOrTake = $otherSoul->warmAndFuzzy <=> $thisSoul->warmAndFuzzy;
+
+        if ($giveOrTake == self::POSITIVE) {
+            // Apply the randomness of life to determine the impact of the hug
+            $hugImpact = intval(random_int($hugImpactMin, $hugImpactMin) * $durationOfHug);
+        } else {
+            // The "icky" factor. Sometimes hugs are just weird and unwanted while other times they can save the world.
+            $hugImpact = $durationOfHug + $giveOrTake;
+        }
+
+        return $hugImpact;
+    }
+
+    /**
+     * Generate the duration for the hug. Minimum to maximum second hugs, anything more and there's something
+     * else going on.
+     *
+     * http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
+     *
+     * @return int
+     */
+    private function generateDurationOfHug()
+    {
+        $durationOfHug = random_int(self::DURATION_MIN, self::DURATION_MAX);
+
+        return $durationOfHug;
+    }
+
+    /**
+     * How much "Warm And Fuzzy" is the object feeling?
+     *
+     * @return int
+     */
+    public function getWarmAndFuzzy(): int
+    {
+        return $this->warmAndFuzzy;
     }
 }

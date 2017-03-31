@@ -1,8 +1,9 @@
 <?php
   /**
-   *
-  */
-  namespace Psr\Hug;
+   * An interface for GroupHuggable objects based on the PSR-8 specification:
+   * https://github.com/php-fig/fig-standards/blob/master/proposed/psr-8-hug/psr-8-hug.md
+   */
+namespace Psr\Hug;
 
   /**
    * Defines a huggable object.
