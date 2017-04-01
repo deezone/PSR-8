@@ -48,7 +48,7 @@ for ($i = 1; $i < 7; $i++) {
 }
 
 /**
- *
+ * Choose which object will be used from the list of lostSoul objects available.
  */
 function selectSoul($lostSouls) {
     $lostSoulIndex = array_rand($lostSouls, 1);
