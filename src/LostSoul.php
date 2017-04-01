@@ -27,12 +27,17 @@ class LostSoul implements Huggable
     // @var int
     private $warmAndFuzzy;
 
+    // @var int
+    private $hugged;
+
     /**
-     * At the beginning of every Lost Soul's existance they start with a feeling of nothing. How sad...
+     * At the beginning of every Lost Soul's existance they start with some general feeling. Funny how some of us are
+     * happier than others even though we all start out the same.
      */
     public function __construct()
     {
-        $this->warmAndFuzzy = 0;
+        $this->warmAndFuzzy = random_int(0, 100);
+        $this->hugged = 0;
     }
 
     /**
@@ -56,7 +61,7 @@ class LostSoul implements Huggable
         }
 
         $durationOfHug = $this->determineDurationOfHug();
-        while ($this->keepHugging($this, $soul, $durationOfHug) == true) {
+        while ($this->keepHugging($this, $soul, $durationOfHug)) {
             $hugImpact = $this->hugImpact($this, $soul, $durationOfHug);
 
             // The power of hugs, everyone is really feeling it
@@ -65,6 +70,9 @@ class LostSoul implements Huggable
 
             // That was great, lets do it again
             $this->hug($soul);
+
+            $this->hugged++;
+            $soul->hugged++;
         }
 
         // For better or worst the hugging has stopped. Time to let go.
@@ -87,6 +95,9 @@ class LostSoul implements Huggable
 
         // Really?!? Absolute bliss? Who has time for another hug?
         if ($thisSoul->warmAndFuzzy >= 100) {
+            $keepHugging = false;
+        }
+        if ($otherSoul->warmAndFuzzy >= 100) {
             $keepHugging = false;
         }
 
@@ -123,14 +134,12 @@ class LostSoul implements Huggable
         $hugImpactMin = intval(ceil($thisSoul->warmAndFuzzy / 10));
 
         // The less positive the other soul feels the greater the maximum impact a hug will make.
-        // But even in the worst care, a hug can always do a little good.
+        // But even for the worst cases, a hug can always do a little good.
         if ($otherSoul->warmAndFuzzy == 0) {
             $hugImpactMax = 1;
         } else {
             $hugImpactMax = intval(ceil($otherSoul->warmAndFuzzy / 10));
         }
-
-
 
         // Depending who is feeling more positive, a hug's effect can be positive or negative or even nothing at all.
         $giveOrTake = $otherSoul->warmAndFuzzy <=> $thisSoul->warmAndFuzzy;
@@ -139,7 +148,7 @@ class LostSoul implements Huggable
             // Apply the randomness of life to determine the impact of the hug
             $hugImpact = intval(random_int($hugImpactMin, $hugImpactMax) * $durationOfHug);
         } else {
-            // The "icky" factor. Sometimes hugs are just weird and unwanted while other times they can save the world.
+            // The "icky" factor. Sometimes hugs are just weird and unwanted.
             $hugImpact = $durationOfHug + $giveOrTake;
         }
 
@@ -169,5 +178,15 @@ class LostSoul implements Huggable
     public function getWarmAndFuzzy(): int
     {
         return $this->warmAndFuzzy;
+    }
+
+    /**
+     * How many times has this soul been hugged?
+     *
+     * @return int
+     */
+    public function getTimesHugged(): int
+    {
+        return $this->hugged;
     }
 }
