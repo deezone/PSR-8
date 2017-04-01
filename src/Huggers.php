@@ -12,11 +12,19 @@ use Psr\Hug\Huggable;
 
 abstract class Huggers implements Huggable
 {
-    // @var int
-    private $warmAndFuzzy;
+
+    const POSITIVE = 1;
+
+    // Hug duration range
+    // http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
+    const DURATION_MIN = 1;
+    const DURATION_MAX = 6;
 
     // @var int
-    private $hugged;
+    protected $warmAndFuzzy;
+
+    // @var int
+    protected $hugged;
 
     /**
      * At the beginning of every object existance they start with some general feeling. Funny how some are
@@ -76,10 +84,7 @@ abstract class Huggers implements Huggable
      *
      * @return bool
      */
-    private function keepHugging(Huggable $thisSoul, Huggable $otherSoul, int $durationOfHug): bool
-    {
-
-    }
+    abstract protected function keepHugging(Huggable $thisSoul, Huggable $otherSoul, int $durationOfHug): bool;
 
     /**
      * Determine the impact / value of a hug. Not all hugs are created equal.
@@ -91,10 +96,7 @@ abstract class Huggers implements Huggable
      *
      * @return int
      */
-    private function hugImpact(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): int
-    {
-
-    }
+    abstract protected function hugImpact(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): int;
 
     /**
      * Determine the duration for the hug. Minimum to maximum second hugs, anything more and there's something
@@ -104,7 +106,7 @@ abstract class Huggers implements Huggable
      *
      * @return int
      */
-    private function determineDurationOfHug()
+    protected function determineDurationOfHug()
     {
         $durationOfHug = random_int(self::DURATION_MIN, self::DURATION_MAX);
 

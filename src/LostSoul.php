@@ -17,14 +17,6 @@ use Psr\Hug\Huggable;
  */
 class LostSoul extends Huggers
 {
-
-    const POSITIVE = 1;
-
-    // Hug duration range
-    // http://www.sciencemag.org/news/2011/01/hugs-follow-3-second-rule
-    const DURATION_MIN = 1;
-    const DURATION_MAX = 6;
-
     /**
      * Determine if another exchange of hugs is desired.
      *
@@ -34,7 +26,7 @@ class LostSoul extends Huggers
      *
      * @return bool
      */
-    private function keepHugging(Huggable $thisSoul, Huggable $otherSoul, int $durationOfHug): bool
+    protected function keepHugging(Huggable $thisSoul, Huggable $otherSoul, int $durationOfHug): bool
     {
         // Always start from a positive perspective.
         $keepHugging = true;
@@ -72,7 +64,7 @@ class LostSoul extends Huggers
      *
      * @return int
      */
-    private function hugImpact(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): int
+    protected function hugImpact(Huggable $thisSoul, Huggable $otherSoul, $durationOfHug): int
     {
         $hugImpact = 0;
 
