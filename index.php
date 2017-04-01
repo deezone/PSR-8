@@ -7,7 +7,8 @@
 // Load up the Composer autoload magic
 require_once __DIR__ . '/vendor/autoload.php';
 
-use DeeZone\Hug\LostSoul;
+use Psr\Hug\LostSoul;
+
 
 // Imagine all the people... - JOHN LENNON
 // @todo: Impliment random number of returned hugs requested as parameter to instantion of LostSoul class.

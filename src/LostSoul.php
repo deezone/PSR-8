@@ -7,9 +7,9 @@
    */
 declare(strict_types=1);
 
-namespace DeeZone\Hug;
+namespace Psr\Hug;
 
-use Psr\Hug\Huggable;
+use Psr\Hug\Huggers;
 
 /**
  * Class LostSoul

@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace DeeZone\Hug;
 
 use Psr\Hug\Huggable;
+use Psr\Hug\Huggers;
 use PHPUnit\Framework\TestCase;
 
 /**

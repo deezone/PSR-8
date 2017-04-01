@@ -5,11 +5,14 @@
 
 declare(strict_types=1);
 
-namespace DeeZone\Hug;
+namespace Psr\Hug;
 
 use Psr\Hug\Huggable;
 
-
+/**
+ * Class Huggers
+ * @package DeeZone\Hug
+ */
 abstract class Huggers implements Huggable
 {
 
