@@ -24,7 +24,7 @@ abstract class Huggers implements Huggable
     const DURATION_MAX = 6;
 
     // @var int
-    protected $warmAndFuzzy;
+    public $warmAndFuzzy;
 
     // @var int
     protected $hugged;

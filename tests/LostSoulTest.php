@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace DeeZone\Hug;
+namespace Psr\Hug;
 
 use Psr\Hug\Huggable;
 use Psr\Hug\Huggers;
@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class LostSoulTest extends TestCase
 {
+    /*
     public function testReciprocatesHugs()
     {
         $lostSoul = new LostSoul();
@@ -31,6 +32,7 @@ final class LostSoulTest extends TestCase
         // reveal the prophecy and create an actual test double object
         $lostSoul->hug($mock->reveal());
     }
+    */
 
     /**
      * @expectedException \Exception
