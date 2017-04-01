@@ -14,21 +14,48 @@ use DeeZone\Hug\LostSoul;
 $lostSouls[] = new LostSoul();
 $lostSouls[] = new LostSoul();
 $lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
+$lostSouls[] = new LostSoul();
 
-// Each lost soul gives out some love in the hopes of getting some back
+// Each lost soul gives out some "warm and fuzzies" in the hopes of getting some back
 // PSR-8 spec #1 : "expresses affection and support"
-foreach ($lostSouls as $lostSoulCount => $lostSoul) {
-    foreach ($lostSouls as $otherLostSoulCount => $otherLostSoul) {
-        // Not a bad idea but the spec says you can't hug yourself
-        if ($lostSoulCount != $otherLostSoulCount) {
-            try {
-                echo 'Lost Soul: ', $lostSoulCount, PHP_EOL;
-                echo 'Other Lost Soul: ', $otherLostSoulCount, PHP_EOL;
-                $lostSoul->hug($otherLostSoul);
-                echo PHP_EOL, PHP_EOL;
-            } catch (Throwable $t) {
-                echo $t->getMessage(), PHP_EOL;
-            }
-        }
+for ($i = 1; $i < 7; $i++) {
+
+    try {
+        echo '$i: ', $i, PHP_EOL;
+        $lostSoul = selectSoul($lostSouls);
+        $otherLostSoul = selectSoul($lostSouls);
+
+        echo PHP_EOL, 'Time to try for some hugs...', PHP_EOL;
+        $lostSoul->hug($otherLostSoul);
+
+        // After hug
+        echo 'Lost Soul: ', spl_object_hash($lostSoul), ' is feeling WarmAndFuzzy: ', $lostSoul->getWarmAndFuzzy(), ' after ', $lostSoul->getTimesHugged(), ' hugs.', PHP_EOL;
+        echo 'Other Lost Soul: ', spl_object_hash($otherLostSoul), ' is feeling WarmAndFuzzy: ', $otherLostSoul->getWarmAndFuzzy(), ' after ', $otherLostSoul->getTimesHugged(), ' hugs.', PHP_EOL, PHP_EOL;
+        echo '--------------', PHP_EOL;
+        echo PHP_EOL, PHP_EOL;
+
+    } catch (Throwable $t) {
+
+        echo PHP_EOL, '********', PHP_EOL;
+        echo $t->getMessage(), PHP_EOL;
+        echo '********', PHP_EOL;
+
     }
+
+}
+
+/**
+ * Choose which object will be used from the list of lostSoul objects available.
+ */
+function selectSoul($lostSouls) {
+    $lostSoulIndex = array_rand($lostSouls, 1);
+    echo 'lostSoulIndex: ', $lostSoulIndex, PHP_EOL;
+    $lostSoul = $lostSouls[$lostSoulIndex];
+
+    echo '- Lost Soul: ', spl_object_hash($lostSoul), ' is feeling WarmAndFuzzy: ', $lostSoul->getWarmAndFuzzy(), ' after ', $lostSoul->getTimesHugged(), ' hugs.', PHP_EOL;
+
+    return $lostSoul;
 }
