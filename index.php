@@ -21,10 +21,10 @@ $lostSouls[] = new LostSoul();
 
 // Each lost soul gives out some "warm and fuzzies" in the hopes of getting some back
 // PSR-8 spec #1 : "expresses affection and support"
-for ($i = 1; $i < 7; $i++) {
+for ($hugRound = 1; $hugRound < 7; $hugRound++) {
 
     try {
-        echo '$i: ', $i, PHP_EOL;
+        echo 'Hug Round: ' . $hugRound, PHP_EOL;
         $lostSoul = selectSoul($lostSouls);
         $otherLostSoul = selectSoul($lostSouls);
 
@@ -32,8 +32,10 @@ for ($i = 1; $i < 7; $i++) {
         $lostSoul->hug($otherLostSoul);
 
         // After hug
-        echo 'Lost Soul: ', spl_object_hash($lostSoul), ' is feeling WarmAndFuzzy: ', $lostSoul->getWarmAndFuzzy(), ' after ', $lostSoul->getTimesHugged(), ' hugs.', PHP_EOL;
-        echo 'Other Lost Soul: ', spl_object_hash($otherLostSoul), ' is feeling WarmAndFuzzy: ', $otherLostSoul->getWarmAndFuzzy(), ' after ', $otherLostSoul->getTimesHugged(), ' hugs.', PHP_EOL, PHP_EOL;
+        echo 'Lost Soul: ' . spl_object_hash($lostSoul) . ' is feeling WarmAndFuzzy: ' . $lostSoul->getWarmAndFuzzy() .
+            ' after ' . $lostSoul->getTimesHugged() . ' hugs.', PHP_EOL;
+        echo 'Other Lost Soul: ' . spl_object_hash($otherLostSoul) . ' is feeling WarmAndFuzzy: ' .
+            $otherLostSoul->getWarmAndFuzzy() . ' after ' . $otherLostSoul->getTimesHugged() . ' hugs.', PHP_EOL, PHP_EOL;
         echo '--------------', PHP_EOL;
         echo PHP_EOL, PHP_EOL;
 

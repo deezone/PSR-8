@@ -3,6 +3,8 @@
  * An interface for Huggable objects based on the PSR-8 specification:
  * https://github.com/php-fig/fig-standards/blob/master/proposed/psr-8-hug/psr-8-hug.md
  */
+declare(strict_types=1);
+
 namespace Psr\Hug;
 
 /**
@@ -31,4 +33,10 @@ interface Huggable
    * Respond with the current amount of love that the huggable object is feeling.
    */
     public function getWarmAndFuzzy();
+
+    /**
+     * The number of times the object has been hugged.
+     */
+    public function getTimesHugged();
+
 }
