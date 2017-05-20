@@ -20,6 +20,9 @@ final class LostSoulTest extends TestCase
     /*
     public function testReciprocatesHugs()
     {
+
+
+
         $lostSoul = new LostSoul();
 
         // PHPUnit 4.5 and Prophecy
@@ -31,6 +34,8 @@ final class LostSoulTest extends TestCase
 
         // reveal the prophecy and create an actual test double object
         $lostSoul->hug($mock->reveal());
+
+        $this->assertTrue(false);
     }
     */
 
