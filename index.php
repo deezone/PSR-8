@@ -9,20 +9,17 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Psr\Hug\LostSoul;
 
+// https://www.mindbodygreen.com/0-5756/10-Reasons-Why-We-Need-at-Least-8-Hugs-a-Day.html
+// Virginia Satir, a respected family therapist, “We need four hugs a day for survival. We need eight hugs a day for
+// maintenance. We need twelve hugs a day for growth.”
+$totalHugs = random_int(4, 12);
 
 // Imagine all the people... - JOHN LENNON
-// @todo: Impliment random number of returned hugs requested as parameter to instantion of LostSoul class.
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
-$lostSouls[] = new LostSoul();
+$lostSouls = generateSouls();
 
 // Each lost soul gives out some "warm and fuzzies" in the hopes of getting some back
 // PSR-8 spec #1 : "expresses affection and support"
-for ($hugRound = 1; $hugRound < 7; $hugRound++) {
+for ($hugRound = 1; $hugRound < $totalHugs; $hugRound++) {
 
     try {
         echo 'Hug Round: ' . $hugRound, PHP_EOL;
@@ -52,6 +49,9 @@ for ($hugRound = 1; $hugRound < 7; $hugRound++) {
 
 /**
  * Choose which object will be used from the list of lostSoul objects available.
+ *
+ * @param $lostSouls array
+ * @return object
  */
 function selectSoul($lostSouls) {
     $lostSoulIndex = array_rand($lostSouls, 1);
@@ -61,4 +61,24 @@ function selectSoul($lostSouls) {
     echo '- Lost Soul: ', spl_object_hash($lostSoul), ' is feeling WarmAndFuzzy: ', $lostSoul->getWarmAndFuzzy(), ' after ', $lostSoul->getTimesHugged(), ' hugs.', PHP_EOL;
 
     return $lostSoul;
+}
+
+/**
+ * Generate lost souls.
+ *
+ * @param $totalSouls int
+ * @return object
+ */
+function generateSouls($totalSouls = 0) {
+    $lostSouls = [];
+
+    if ($totalSouls == 0) {
+        $totalSouls = random_int(0, 10);
+    }
+
+    for ($i = 0; $i <= $totalSouls; $i++;) {
+        $lostSouls[] = new LostSoul();
+    }
+
+    return $lostSouls;
 }
