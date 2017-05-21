@@ -92,5 +92,4 @@ class LostSoul extends Huggers
 
         return $hugImpact;
     }
-
 }

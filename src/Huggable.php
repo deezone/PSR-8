@@ -38,5 +38,4 @@ interface Huggable
      * The number of times the object has been hugged.
      */
     public function getTimesHugged();
-
 }

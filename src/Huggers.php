@@ -135,5 +135,4 @@ abstract class Huggers implements Huggable
     {
         return $this->hugged;
     }
-
 }
