@@ -24,7 +24,7 @@ abstract class Huggers implements Huggable
     const DURATION_MAX = 6;
 
     // @var int
-    public $warmAndFuzzy;
+    protected $warmAndFuzzy;
 
     // @var int
     protected $hugged;
@@ -35,7 +35,7 @@ abstract class Huggers implements Huggable
      */
     public function __construct()
     {
-        $this->warmAndFuzzy = random_int(0, 100);
+        $this->warmAndFuzzy = 0;
         $this->hugged = 0;
     }
 
@@ -66,12 +66,11 @@ abstract class Huggers implements Huggable
             // The power of hugs, everyone is really feeling it
             $this->warmAndFuzzy += $hugImpact;
             $soul->warmAndFuzzy += $hugImpact;
+            $this->hugged++;
+            $soul->hugged++;
 
             // That was great, lets do it again
             $this->hug($soul);
-
-            $this->hugged++;
-            $soul->hugged++;
         }
 
         // For better or worst the hugging has stopped. Time to let go.
