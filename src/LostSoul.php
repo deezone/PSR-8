@@ -1,7 +1,7 @@
 <?php
   /**
    * There are many lost souls in various states of mind. With a few hugs their state or at least their
-   * properties can be changed. Once a lost soul is hugged it will inspire them to hug back which ultmatly
+   * properties can be changed. Once a lost soul is hugged it will inspire them to hug back which ultimately
    * will make the world a better place. Or so it is believed:
    * http://health.usnews.com/health-news/health-wellness/articles/2016-02-03/the-health-benefits-of-hugging
    */
