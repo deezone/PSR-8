@@ -17,9 +17,10 @@ use PHPUnit\Framework\TestCase;
  */
 final class LostSoulTest extends TestCase
 {
-    /*
     public function testReciprocatesHugs()
     {
+        $this->markTestSkipped('-> Must be revisited, currently throwing exception.');
+
         $lostSoul = new LostSoul();
 
         // PHPUnit 4.5 and Prophecy
@@ -32,7 +33,6 @@ final class LostSoulTest extends TestCase
         // reveal the prophecy and create an actual test double object
         $lostSoul->hug($mock->reveal());
     }
-    */
 
     /**
      * @expectedException \Exception
@@ -61,10 +61,62 @@ final class LostSoulTest extends TestCase
      */
     public function testTerminatesDefinedHugging()
     {
-        $lostSoul1 = new LostSoul(2);
-        $lostSoul2 = new LostSoul(4);
+        $lostSoul1 = new LostSoul();
+        $lostSoul2 = new LostSoul();
         $lostSoul1->hug($lostSoul2);
 
         $this->assertTrue(true);
+    }
+
+    /**
+     * The effects of a first time hug should effect the WarmAndFuzzy and TimesHugged values for the LostSoul
+     */
+    public function testWarmAndFuzzyAndTimesHugged()
+    {
+        $lostSoul1 = new LostSoul();
+
+        // Test WarmAndFuzzy value of new LostSoul
+        $lostSoul1WarmAndFuzzyBefore = $lostSoul1->getWarmAndFuzzy();
+        $this->assertInternalType("int", $lostSoul1WarmAndFuzzyBefore);
+        $this->assertTrue($lostSoul1WarmAndFuzzyBefore >= 0);
+
+        // Test TimesHugged value of new LostSoul
+        $lostSoul1TimesHugged = $lostSoul1->getTimesHugged();
+        $this->assertInternalType("int", $lostSoul1TimesHugged);
+        $this->assertTrue($lostSoul1TimesHugged == 0);
+
+        $lostSoul2 = new LostSoul();
+
+        $lostSoul2WarmAndFuzzyBefore = $lostSoul2->getWarmAndFuzzy();
+        $this->assertInternalType("int", $lostSoul2WarmAndFuzzyBefore);
+        $this->assertTrue($lostSoul2WarmAndFuzzyBefore >= 0);
+
+        $lostSoul2TimesHugged = $lostSoul2->getTimesHugged();
+        $this->assertInternalType("int", $lostSoul2TimesHugged);
+        $this->assertTrue($lostSoul2TimesHugged == 0);
+
+        $lostSoul1->hug($lostSoul2);
+
+        // Test that WarmAndFuzzy has changed
+        $lostSoul1WarmAndFuzzyAfter = $lostSoul1->getWarmAndFuzzy();
+        $this->assertTrue($lostSoul1WarmAndFuzzyBefore != $lostSoul1WarmAndFuzzyAfter);
+        $lostSoul2WarmAndFuzzyAfter = $lostSoul2->getWarmAndFuzzy();
+        $this->assertTrue($lostSoul2WarmAndFuzzyBefore != $lostSoul2WarmAndFuzzyAfter);
+
+        // Test that times hugged has increased by at least 1
+        $lostSoul1TimesHugged = $lostSoul1->getTimesHugged();
+        $this->assertTrue($lostSoul1TimesHugged >= 1);
+        $lostSoul2TimesHugged = $lostSoul2->getTimesHugged();
+        $this->assertTrue($lostSoul2TimesHugged >= 1);
+    }
+
+    /**
+     * When a LostSoul has reached WarmAndFuzzy maximum the hugging should stop. WarmAndFuzzy and TimesHugged values
+     * should be unchanged.
+     */
+    public function testKeepHugging()
+    {
+        $this->markTestSkipped('-> Must be completed.');
+        $this->assertTrue(false);
     }
 }

@@ -7,3 +7,6 @@ vendor/
 
 # Debugging / logging files
 npm-debug.log
+
+# System files
+.DS_Store
