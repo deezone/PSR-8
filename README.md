@@ -11,9 +11,9 @@ Inspired by the song [Imagine - John Lennon](https://genius.com/John-lennon-imag
 
 ### Sample implementation
 
-- 7 rounds of two random objects will attempt to hug each other.
+- 4 - 12 rounds of two random objects will attempt to hug each other.
 - The two objects will continue to hug each other back until object conditions (keepHugging()) are no longer met.
-- The WarmAndFuzzy property can go up or down after each hug exchange
+- The WarmAndFuzzy property can go up or down after each hug exchange. Sometimes hugs are good, sometimes creepy.
 - The number of times an object is hugged is recorded for the life of the object.
 - When the same object tries to hug itself an Exception is thrown that does not halt processing.
 
@@ -64,7 +64,6 @@ WARNING: You should always love yourself but self hugging is not supported in th
 
 ### Test Coverage
 #### PHP CodeSniffer (Lint)
-- `$ npm run-script lint`
 - `$ node ./node_modules/gulp/bin/gulp lint`
 
 or listing of all coding volations by file.
