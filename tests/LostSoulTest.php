@@ -17,11 +17,9 @@ use PHPUnit\Framework\TestCase;
  */
 final class LostSoulTest extends TestCase
 {
-    /*
     public function testReciprocatesHugs()
     {
-
-
+        $this->markTestSkipped('-> Must be revisited, currently throwing exception.');
 
         $lostSoul = new LostSoul();
 
@@ -34,10 +32,7 @@ final class LostSoulTest extends TestCase
 
         // reveal the prophecy and create an actual test double object
         $lostSoul->hug($mock->reveal());
-
-        $this->assertTrue(false);
     }
-    */
 
     /**
      * @expectedException \Exception
@@ -104,14 +99,15 @@ final class LostSoulTest extends TestCase
 
         // Test that WarmAndFuzzy has changed
         $lostSoul1WarmAndFuzzyAfter = $lostSoul1->getWarmAndFuzzy();
- //       $this->assertTrue($lostSoul1WarmAndFuzzyBefore != $lostSoul1WarmAndFuzzyAfter);
-
+        $this->assertTrue($lostSoul1WarmAndFuzzyBefore != $lostSoul1WarmAndFuzzyAfter);
         $lostSoul2WarmAndFuzzyAfter = $lostSoul2->getWarmAndFuzzy();
- //       $this->assertTrue($lostSoul2WarmAndFuzzyBefore != $lostSoul2WarmAndFuzzyAfter);
+        $this->assertTrue($lostSoul2WarmAndFuzzyBefore != $lostSoul2WarmAndFuzzyAfter);
 
-        // Test that times hugged has increased by 1
- //       $this->assertTrue($lostSoul1TimesHugged == 1);
- //       $this->assertTrue($lostSoul2TimesHugged == 1);
+        // Test that times hugged has increased by at least 1
+        $lostSoul1TimesHugged = $lostSoul1->getTimesHugged();
+        $this->assertTrue($lostSoul1TimesHugged >= 1);
+        $lostSoul2TimesHugged = $lostSoul2->getTimesHugged();
+        $this->assertTrue($lostSoul2TimesHugged >= 1);
     }
 
     /**
@@ -120,7 +116,7 @@ final class LostSoulTest extends TestCase
      */
     public function testKeepHugging()
     {
-        $this->markTestSkipped('must be revisited.');
+        $this->markTestSkipped('-> Must be completed.');
         $this->assertTrue(false);
     }
 }

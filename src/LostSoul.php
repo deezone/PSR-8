@@ -42,7 +42,7 @@ class LostSoul extends Huggers
         // There's always a chance that things might get weird. Once the duration of the hug exceeds the comfort zone
         // @todo: move hugComfort calculation to own method
         $hugComfortZone = random_int(self::DURATION_MIN, self::DURATION_MAX);
-        if ($durationOfHug > $hugComfortZone) {
+        if ($durationOfHug >= $hugComfortZone) {
             $keepHugging = false;
         }
 
