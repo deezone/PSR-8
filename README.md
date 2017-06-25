@@ -85,9 +85,11 @@ requirements in the examples listed.
 - `$ ./vendor/bin/phpcbf -h`
 
 ##### Run Test in `/tests` Directory
+Run any one of these commands to trigger PHPUnit testing.
 - `$ ./vendor/bin/phpunit --verbose --testdox tests`
 - `$ npm test`
 - `$ node ./node_modules/gulp/bin/gulp test`
+- `$ gulp test`
 
 ### References:
 - [Annotated ruleset.xml](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage)
